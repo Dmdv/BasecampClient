@@ -26,7 +26,7 @@ class OauthController < ApplicationController
 
     #@request_token = OAuth::RequestToken.new(@consumer, session[:request_token], session[:request_token_secret])
 
-    @request_token = @consumer.get_request_token({:oauth_callback => oauth_callback }, :foo => "bar", :header => 'User-Agent: Freshbooks (http://freshbooks.com)')
+    @request_token = @consumer.get_request_token({:oauth_callback => oauth_callback }, :header => 'User-Agent: Freshbooks (http://freshbooks.com)')
     redirect_to @request_token.authorize_url
 
     #@accesstoken = @requesttoken.get_access_token
