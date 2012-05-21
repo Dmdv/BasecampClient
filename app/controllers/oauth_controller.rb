@@ -1,5 +1,6 @@
 class OauthController < ApplicationController
   def login
+    require 'oauth2'
 
     # http://oauth.rubyforge.org/
     # https://github.com/oauth/oauth-ruby
@@ -15,19 +16,28 @@ class OauthController < ApplicationController
     @clientsecret = Api::CLIENTSECRET
     @redirecturl = Api::REDIRECTURL
 
-    @consumer = OAuth::Consumer.new @clientid,
-                                    @clientsecret,
-                                    { :site => "https://launchpad.37signals.com",
-                                      :ca_file => Rails.root.join('lib/ca-bundle.crt').to_s,
-                                      :request_token_path => 'https://launchpad.37signals.com/authorization/new',
-                                      :access_token_path  => 'https://launchpad.37signals.com/authorization/token',
-                                      :redirect_uri       => 'https://localhost:3000/oauth/request_token',
-                                      :header => 'User-Agent: Freshbooks (http://freshbooks.com)'}
+    @client = OAuth2::Client.new(@clientid, @clientsecret, :site => 'https://launchpad.37signals.com/authorization/new')
+    @client.auth_code.authorize_url(:redirect_uri => 'https://localhost:3000/oauth/request_token')
+    @token = @client.auth_code.get_token('authorization_code_value',
+                                        :redirect_uri => 'https://localhost:3000/oauth/request_token',
+                                        :headers => {'Authorization' => 'Basic some_password'})
+
+    @response = token.get('/api/resource', :params => { 'query_foo' => 'bar' })
+    @response.class.name
+
+    #@consumer = OAuth::Consumer.new @clientid,
+    #                                @clientsecret,
+    #                                { :site => "https://launchpad.37signals.com",
+    #                                  :ca_file => Rails.root.join('lib/ca-bundle.crt').to_s,
+    #                                  :request_token_path => 'https://launchpad.37signals.com/authorization/new',
+    #                                  :access_token_path  => 'https://launchpad.37signals.com/authorization/token',
+    #                                  :redirect_uri       => 'https://localhost:3000/oauth/request_token',
+    #                                  :header => 'User-Agent: Freshbooks (http://freshbooks.com)'}
 
     #@request_token = OAuth::RequestToken.new(@consumer, session[:request_token], session[:request_token_secret])
 
-    @request_token = @consumer.get_request_token({:oauth_callback => oauth_callback }, :header => 'User-Agent: Freshbooks (http://freshbooks.com)')
-    redirect_to @request_token.authorize_url
+    #@request_token = @consumer.get_request_token({:oauth_callback => oauth_callback }, :header => 'User-Agent: Freshbooks (http://freshbooks.com)')
+    #redirect_to @request_token.authorize_url
 
     #@accesstoken = @requesttoken.get_access_token
     #@photos = @accesstoken.get('/photos.xml')
@@ -39,6 +49,7 @@ class OauthController < ApplicationController
   end
 
   def request_token
+    puts "callback request"
   end
 
   def access_token
