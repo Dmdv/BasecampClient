@@ -46,3 +46,7 @@ OAuth::Unauthorized (404 Not Found):
 
 Started GET "/oauth/login" for 127.0.0.1 at 2012-05-21 01:45:01 +0400
 Processing by OauthController#login as HTML
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at 2012-05-21 13:37:24 +0400
+Served asset /rails.png - 200 OK (116ms)
