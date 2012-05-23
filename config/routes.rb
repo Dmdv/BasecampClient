@@ -1,13 +1,9 @@
 BasecampClient::Application.routes.draw do
   get "oauth/login"
 
-  get "oauth/request_token"
-
-  get "oauth/access_token"
-
   get "oauth/authorize"
 
-  get "/oauth/callback"
+  get "oauth/request_token"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
