@@ -7,6 +7,8 @@ class OauthController < ApplicationController
   # get code
   def request_token
     session[:code] = params[:code].to_s
+    @code = session[:code]
+    #authorize
   end
 
   def client
@@ -21,15 +23,16 @@ class OauthController < ApplicationController
   # get AccessToken
   def token
     @token ||= client.auth_code.get_token(session[:code],
-                                        :redirect_uri => Api::REDIRECTURL,
-                                        :headers => {'Authorization' => 'Basic some_password',
-                                                     'User-Agent' => '100 Efforts (dimos-d@yandex.ru)'})
-                                                    #:ca_file => Rails.root.join('lib/ca-bundle.crt').to_s)
+                                          :redirect_uri => Api::REDIRECTURL,
+                                          :headers => {'Authorization' => 'Basic some_password',
+                                                       'User-Agent' => '100 Efforts (dimos-d@yandex.ru)'})
+    @bearer = @token.token
+    @token
   end
 
   def authorize
     response = token.get('https://launchpad.37signals.com/authorization.json')
-    test = JSON.parse(response.body)
+    @autorizeinfo = JSON.parse(response.body)
   end
 end
 

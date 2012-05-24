@@ -3,6 +3,7 @@ BasecampClient::Application.routes.draw do
 
   get "oauth/authorize"
 
+  # This is required for oauth callback
   get "oauth/request_token"
 
   # The priority is based upon order of creation:
