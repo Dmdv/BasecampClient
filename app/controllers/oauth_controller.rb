@@ -8,7 +8,6 @@ class OauthController < ApplicationController
   def request_token
     session[:code] = params[:code].to_s
     @code = session[:code]
-    #authorize
   end
 
   def client
@@ -33,10 +32,8 @@ class OauthController < ApplicationController
   def authorize
     response = token.get('https://launchpad.37signals.com/authorization.json')
     @autorizeinfo = JSON.parse(response.body)
-
-    #path = '/projects.json'
-    #"#{Url::HOST}/#{code}/#{Url::POSTFIX}}/#{path}"
-    #@projects = token.get()
+    project = Projects.new(token)
+    @projects = project.projects
   end
 end
 
