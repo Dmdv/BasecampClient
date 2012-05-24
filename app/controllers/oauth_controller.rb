@@ -33,10 +33,16 @@ class OauthController < ApplicationController
   def authorize
     response = token.get('https://launchpad.37signals.com/authorization.json')
     @autorizeinfo = JSON.parse(response.body)
+
+    #path = '/projects.json'
+    #"#{Url::HOST}/#{code}/#{Url::POSTFIX}}/#{path}"
+    #@projects = token.get()
   end
 end
 
-# http://oauth.rubyforge.org/
+require "api.rb"
+
+# http://developer.37signals.com
 # https://github.com/oauth/oauth-ruby
 # https://github.com/37signals/bcx-api/blob/master/sections/authentication.md
 # https://github.com/37signals/bcx-api
@@ -44,4 +50,3 @@ end
 # http://stakeventures.com/articles/2008/02/23/developing-oauth-clients-in-ruby
 # https://github.com/pelle/oauth
 # https://github.com/anibalcucco/basecamp-wrapper
-# http://developer.37signals.com/
