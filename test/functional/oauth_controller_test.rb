@@ -16,8 +16,8 @@ class OauthControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get authorize" do
-    get :authorize
+  test "should get projects" do
+    get :projects
     assert_response :success
   end
 

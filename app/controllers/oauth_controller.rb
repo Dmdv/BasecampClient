@@ -23,17 +23,18 @@ class OauthController < ApplicationController
   def token
     @token ||= client.auth_code.get_token(session[:code],
                                           :redirect_uri => Api::REDIRECTURL,
-                                          :headers => {'Authorization' => 'Basic some_password',
-                                                       'User-Agent' => '100 Efforts (dimos-d@yandex.ru)'})
+                                          :headers => {:Authorization => 'Basic some_password',
+                                                       'User-Agent' => '100 Efforts (dimos-d@yandex.ru)',
+                                                       :ca_file => Rails.root.join('lib/cert.pem').to_s})
     @bearer = @token.token
     @token
   end
 
-  def authorize
-    response = token.get('https://launchpad.37signals.com/authorization.json')
-    @autorizeinfo = JSON.parse(response.body)
-    project = Projects.new(token)
-    @projects = project.projects
+  def projects
+    pr = Projects.new(token)
+    @projects = pr.get_all
+    #response = token.get('https://launchpad.37signals.com/authorization.json')
+    #@autorizeinfo = JSON.parse(response.body)
   end
 end
 

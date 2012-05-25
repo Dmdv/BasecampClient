@@ -1,11 +1,24 @@
+# Projects
 class Projects
-  PATH = 'projects.json'
-	attr_reader :token
+  attr_reader :token
 
-  # @param [AccessToken] token
+  # @param [AccessToken] token access token
   def initialize(token)
-    @token = token
-    @path = "#{Host::URL}/#{Basecamp::PROJECTID}/#{Host::POSTFIX}/#{PATH}"
-    @projects = @token.get(@path)
-	end
+    @token = TokenAdapter.new(token)
+  end
+
+  # @param [Project IDD] id project id
+  def get_all(id = Project::IDD)
+    self.token.get(id, 'projects.json')
+  end
+
+  # @param [Integer] projectid returns project by id
+  def get_single(projectid, id = Project::IDD)
+    self.token.get(id, "projects/#{projectid}.json")
+  end
+
+  # @param [Integer] projectid returns project by id
+  def delete(projectid, id = Project::IDD)
+    self.token.delete(id, "projects/#{projectid}.json")
+  end
 end

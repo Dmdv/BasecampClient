@@ -1,7 +1,7 @@
 BasecampClient::Application.routes.draw do
   get "oauth/login"
 
-  get "oauth/authorize"
+  get "oauth/projects"
 
   # This is required for oauth callback
   get "oauth/request_token"
