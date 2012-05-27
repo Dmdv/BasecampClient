@@ -26,6 +26,11 @@ class OauthController < ApplicationController
                                           :headers => {:Authorization => 'Basic some_password',
                                                        'User-Agent' => '100 Efforts (dimos-d@yandex.ru)',
                                                        :ca_file => Rails.root.join('lib/cert.pem').to_s})
+
+    tokens = Token.all
+    Token tok = Token.new(:token => @token.token, :refresh_token => @token.refresh_token)
+    tok.save
+
     @bearer = @token.token
     @token
   end

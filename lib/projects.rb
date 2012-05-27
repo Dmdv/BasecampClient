@@ -17,8 +17,21 @@ class Projects
     self.token.get(id, "projects/#{projectid}.json")
   end
 
-  # @param [Integer] projectid returns project by id
+  # @param [Integer] projectid deletes project by id
   def delete(projectid, id = Project::IDD)
     self.token.delete(id, "projects/#{projectid}.json")
+  end
+
+  def create(id = Project::IDD, name, description)
+    opts = {:name => name, :descrption => description}
+    self.token.post(id, 'projects.json', opts)
+  end
+
+  def update(projectid, name, description, id = Project::IDD)
+    opts = {:name => name, :descrption => description}
+    self.token.put(id, "projects/#{projectid}.json", opts)
+  end
+
+  def archive()
   end
 end
