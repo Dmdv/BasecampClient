@@ -1,6 +1,6 @@
 <h1>Projects#new</h1>
 
-<%= form_for @newproject  do |f| %>
+<%= form_tag(@newproject)  do |f| %>
   <%= f.label :name %>:
   <%= f.text_field :description %><br />
 

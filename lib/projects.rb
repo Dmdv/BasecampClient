@@ -8,26 +8,26 @@ class Projects
   end
 
   # @param [Project IDD] id project id
-  def get_all(id = Project::IDD)
+  def get_all(id = ProjectParams::IDD)
     self.token.get(id, 'projects.json')
   end
 
   # @param [Integer] projectid returns project by id
-  def get_single(projectid, id = Project::IDD)
+  def get_single(projectid, id = ProjectParams::IDD)
     self.token.get(id, "projects/#{projectid}.json")
   end
 
   # @param [Integer] projectid deletes project by id
-  def delete(projectid, id = Project::IDD)
+  def delete(projectid, id = ProjectParams::IDD)
     self.token.delete(id, "projects/#{projectid}.json")
   end
 
-  def create(id = Project::IDD, name, description)
+  def create(id = ProjectParams::IDD, name, description)
     opts = {:name => name, :descrption => description}
     self.token.post(id, 'projects.json', opts)
   end
 
-  def update(projectid, name, description, id = Project::IDD)
+  def update(projectid, name, description, id = ProjectParams::IDD)
     opts = {:name => name, :descrption => description}
     self.token.put(id, "projects/#{projectid}.json", opts)
   end

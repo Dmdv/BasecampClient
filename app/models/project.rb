@@ -6,12 +6,12 @@ class Project
     @description = ""
   end
 
-  def name=(value)
-    @name = value
-  end
-
-  def description(value)
-    @description = value
-  end
+  #def name=(value)
+  #  @name = value
+  #end
+  #
+  #def description(value)
+  #  @description = value
+  #end
 
 end
