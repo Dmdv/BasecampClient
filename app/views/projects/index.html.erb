@@ -1,0 +1,40 @@
+<h1>Projects#index</h1>
+
+<p><b>Projects: </b></p>
+
+<table class="projects">
+  <% @projects.each do |project| %>
+      <tr>
+        <td><b>Name:</b></td>
+        <td>
+          <%= project['name'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Description:</b></td>
+        <td>
+          <%= project['description'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Created at:</b></td>
+        <td>
+          <%= project['created_at'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Updated at:</b></td>
+        <td>
+          <%= project['updated_at'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Url:</b></td>
+        <td><a href="<%= project['url'] %>"><%= project['url'] %></a></td>
+      </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "Create project", projects_new_path %></p>
+
+<p>Find me in app/views/projects/index.html.erb</p>

@@ -1,10 +1,26 @@
 BasecampClient::Application.routes.draw do
-  get "oauth/login"
+  get "projects/index"
 
-  get "oauth/projects"
+  get "projects/get"
+
+  get "projects/new"
+
+  get "projects/update"
+
+  get "projects/archive"
+
+  get "projects/delete"
+
+  get "oauth/login"
 
   # This is required for oauth callback
   get "oauth/request_token"
+
+  match 'login' => 'oauth#login'
+
+  match 'index' => 'oauth#login'
+
+  match 'projects' => 'oauth#login'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

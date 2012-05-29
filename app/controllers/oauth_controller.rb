@@ -1,45 +1,31 @@
 class OauthController < ApplicationController
-  # get authorization url
+  # gets authorization url
   def login
-    redirect_to client.auth_code.authorize_url(:redirect_uri => Api::REDIRECTURL)
+    # if AccessToken doesn't exist, redirects to autorization page
+    if TokenFactory.any?
+      redirect_to :controller => 'projects', :action => 'index'
+    else
+      redirect_to client.auth_code.authorize_url(:redirect_uri => Api::REDIRECTURL)
+    end
   end
 
-  # get code
+  # saves code to session and redirects to token creation
   def request_token
-    session[:code] = params[:code].to_s
-    @code = session[:code]
+    code = params[:code].to_s
+    create_token(code)
+    # After the code has been received, redirects to projects.
+    redirect_to :controller => 'projects', :action => 'index'
   end
 
-  def client
-    @options = {:authorize_url => 'https://launchpad.37signals.com/authorization/new',
-                :token_url => 'https://launchpad.37signals.com/authorization/token',
-                :token_method => :post,
-                :raise_errors => true,
-                :site => 'https://launchpad.37signals.com'}
-    @client ||= BaseClient.new(Api::CLIENTID, Api::CLIENTSECRET, @options)
-  end
-
-  # get AccessToken
-  def token
-    @token ||= client.auth_code.get_token(session[:code],
-                                          :redirect_uri => Api::REDIRECTURL,
-                                          :headers => {:Authorization => 'Basic some_password',
-                                                       'User-Agent' => '100 Efforts (dimos-d@yandex.ru)',
-                                                       :ca_file => Rails.root.join('lib/cert.pem').to_s})
-
-    tokens = Token.all
-    Token tok = Token.new(:token => @token.token, :refresh_token => @token.refresh_token)
-    tok.save
-
-    @bearer = @token.token
-    @token
-  end
-
-  def projects
-    pr = Projects.new(token)
-    @projects = pr.get_all
-    #response = token.get('https://launchpad.37signals.com/authorization.json')
-    #@autorizeinfo = JSON.parse(response.body)
+  # @param [Integer] code
+  def create_token(code)
+    client = Client.create
+    token = client.auth_code.get_token(code,
+                                       :redirect_uri => Api::REDIRECTURL,
+                                       :headers => {:Authorization => 'Basic some_password',
+                                                    'User-Agent' => '100 Efforts (dimos-d@yandex.ru)',
+                                                    :ca_file => Rails.root.join('lib/cert.pem').to_s})
+    TokenFactory.update_accesstoken(token)
   end
 end
 

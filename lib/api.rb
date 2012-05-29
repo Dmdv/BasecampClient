@@ -11,7 +11,7 @@ module Api
   end
 end
 
-module Project
+module ProjectParams
   IDD = '1831716'
 end
 
