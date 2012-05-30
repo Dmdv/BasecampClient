@@ -1,4 +1,7 @@
 class Project
+  extend ActiveModel::Naming
+  include ActiveModel::Conversion
+
   attr_accessor :name, :description
 
   def initialize
@@ -6,12 +9,7 @@ class Project
     @description = ""
   end
 
-  #def name=(value)
-  #  @name = value
-  #end
-  #
-  #def description(value)
-  #  @description = value
-  #end
-
+  def persisted?
+      false
+  end
 end

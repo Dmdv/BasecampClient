@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   attr_reader :projects, :name, :description
-  attr_accessor :newproject
+  attr_accessor :newproject, :notnill
   def index
     token = TokenFactory.get_accesstoken
     @projects = Projects.new(token).get_all
