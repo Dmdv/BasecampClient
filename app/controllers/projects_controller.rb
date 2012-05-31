@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
-  attr_reader :projects, :name, :description
-  attr_accessor :newproject, :notnill
+  attr_reader :projects
+  attr_accessor :project
+
   def index
     token = TokenFactory.get_accesstoken
     @projects = Projects.new(token).get_all
@@ -12,8 +13,14 @@ class ProjectsController < ApplicationController
   def get
   end
 
+  # this is used when button creat clicked
   def new
-    @newproject = Project.new
+    @project = Project.new
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @project }
+    end
   end
 
   def update
@@ -23,5 +30,10 @@ class ProjectsController < ApplicationController
   end
 
   def delete
+  end
+
+  # this is to process POST message from form
+  def create
+    puts "test"
   end
 end

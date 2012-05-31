@@ -1,11 +1,5 @@
 <h1>Projects#new</h1>
 
-<%= form_for(@newproject) do |f| %>
-    <%= f.label :name %>:
-    <%= f.text_field :description %><br />
-    <%= f.label :description %>:
-    <%= f.text_field :description %><br /><br />
-    <%= f.submit "Create project" %>
-<% end %>
+<%= render 'form' %>
 
 <p>Find me in app/views/projects/new.html.erb</p>
