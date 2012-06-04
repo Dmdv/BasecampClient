@@ -1,13 +1,13 @@
 class Todolists
-  attr_reader :token
+  attr_reader :token, :projectid
 
   # @param [AccessToken] token access token
-  def initialize(token)
+  def initialize(token, projectid)
     @token = TokenAdapter.new(token)
+    @projectid = projectid
   end
 
-  # @param [Integer] projectid returns project by id
-  def get_all(projectid, id = Account::IDD)
-    self.token.get(id, "projects/#{projectid}/todolists.json")
+  def get_all(id = Account::IDD)
+    self.token.get(id, "projects/#{@projectid}/todolists.json")
   end
 end
