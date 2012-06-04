@@ -8,6 +8,6 @@ class Todolists
 
   # @param [Integer] projectid returns project by id
   def get_all(projectid, id = Account::IDD)
-    self.token.get(id, "projects/#{projectid}/todolists.json")
+    @token.get(id, "projects/#{projectid}/todolists.json")
   end
 end
