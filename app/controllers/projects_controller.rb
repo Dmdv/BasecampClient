@@ -4,8 +4,19 @@ class ProjectsController < ApplicationController
 
   def index
     token = TokenFactory.get_accesstoken
-    @projects = Projects.new(token).get_all
-
+    array = Projects.new(token).get_all
+    @projects = Array.new
+    array.each do |project|
+      proj = Project.new
+      proj.id           = project['id']
+      proj.name         = project['name']
+      proj.description  = project['description']
+      proj.created_at   = project['created_at']
+      proj.updated_at   = project['updated_at']
+      proj.url          = project['url']
+      @projects.append(proj)
+    end
+    @projects
     #response = token.get('https://launchpad.37signals.com/authorization.json')
     #@autorizeinfo = JSON.parse(response.body)
   end

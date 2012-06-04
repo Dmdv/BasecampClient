@@ -11,7 +11,7 @@ module Api
   end
 end
 
-module ProjectParams
+module Account
   IDD = '1831716'
 end
 

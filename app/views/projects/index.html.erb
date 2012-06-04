@@ -5,32 +5,40 @@
 <table class="projects">
   <% @projects.each do |project| %>
       <tr>
+        <td><b>ID:</b></td>
+        <td>
+          <%= project.id %>
+        </td>
         <td><b>Name:</b></td>
         <td>
-          <%= project['name'] %>
+          <%= project.name %>
         </td>
       </tr>
       <tr>
         <td><b>Description:</b></td>
         <td>
-          <%= project['description'] %>
+          <%= project.description %>
         </td>
       </tr>
       <tr>
         <td><b>Created at:</b></td>
         <td>
-          <%= project['created_at'] %>
+          <%= project.created_at %>
         </td>
       </tr>
       <tr>
         <td><b>Updated at:</b></td>
         <td>
-          <%= project['updated_at'] %>
+          <%= project.updated_at %>
         </td>
       </tr>
       <tr>
         <td><b>Url:</b></td>
-        <td><a href="<%= project['url'] %>"><%= project['url'] %></a></td>
+        <td><a href="<%= project.url %>"><%= project.url %></a></td>
+      </tr>
+      <tr>
+        <td><b>Todolists:</b></td>
+        <td><a href="<%= project.url %>"><%= project.url %></a></td>
       </tr>
   <% end %>
 </table>
