@@ -38,12 +38,11 @@
       </tr>
       <tr>
         <td><b>Todolists:</b></td>
-        <td><a href="<%= project.url %>"><%= project.url %></a></td>
+        <td><p><%= link_to "TODO lists", :controller => "todolists", :action => "index", :id => project.id %></p></td>
       </tr>
   <% end %>
 </table>
 
-<p><%= link_to "TODO lists", todolists_index_path, :id => 111 %></p>
 <p><%= link_to "Create project", projects_new_path %></p>
 
 <p>Find me in app/views/projects/index.html.erb</p>

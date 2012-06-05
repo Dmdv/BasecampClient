@@ -1,9 +1,13 @@
 class TodolistsController < ApplicationController
+  attr_accessor :todolists
   def index
     token = TokenFactory.get_accesstoken
     todos = Todolists.new(token)
     projectid = params[:id]
-    todos.get_all(projectid)
+    array = todos.get_all(projectid)
+    array.each do |todo|
+    end
+    @todolists = array
   end
 
   def new

@@ -1,2 +1,54 @@
 <h1>Todolists#index</h1>
+
+<table class="projects">
+  <% @todolists.each do |todo| %>
+      <tr>
+        <td><b>ID:</b></td>
+        <td>
+          <%= todo['id'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Name:</b></td>
+        <td>
+          <%= todo['name'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Description:</b></td>
+        <td>
+          <%= todo['description'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Created at:</b></td>
+        <td>
+          <%= todo['created_at'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Updated at:</b></td>
+        <td>
+          <%= todo['updated_at'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Url:</b></td>
+        <td><a href="<%= todo['url'] %>"><%= todo['url'] %></a></td>
+      </tr>
+      <tr>
+        <td><b>Completed:</b></td>
+        <td>
+          <%= todo['completed'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Position:</b></td>
+        <td>
+          <%= todo['position'] %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
 <p>Find me in app/views/todolists/index.html.erb</p>
