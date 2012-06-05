@@ -1,6 +1,6 @@
 <h1>Todolists#index</h1>
 
-<table class="projects">
+<table class="todolists">
   <% @todolists.each do |todo| %>
       <tr>
         <td><b>ID:</b></td>
@@ -46,6 +46,13 @@
         <td><b>Position:</b></td>
         <td>
           <%= todo['position'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Show TODO items:</b></td>
+        <td>
+          <%= link_to "Show items",
+                      :controller => "todolists", :action => "items", :id => @projectid, :todoid => todo['id'] %>
         </td>
       </tr>
   <% end %>

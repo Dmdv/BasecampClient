@@ -1,13 +1,21 @@
 class TodolistsController < ApplicationController
-  attr_accessor :todolists
+  attr_accessor :todolists, :remaining, :completed
+  attr_reader :projectid
   def index
+    @projectid = params[:id]
     token = TokenFactory.get_accesstoken
     todos = Todolists.new(token)
-    projectid = params[:id]
-    array = todos.get_all(projectid)
-    array.each do |todo|
-    end
-    @todolists = array
+    @todolists = todos.get_all(@projectid)
+  end
+
+  def items
+    @projectid = params[:id]
+    token = TokenFactory.get_accesstoken
+    todos = Todolists.new(token)
+    @todolists = todos.get_items(@projectid, params[:todoid])
+    @remaining = @todolists['todos']['remaining']
+    @completed = @todolists['todos']['completed']
+    puts "test"
   end
 
   def new
