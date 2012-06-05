@@ -1,4 +1,14 @@
 BasecampClient::Application.routes.draw do
+  get "todolists/index"
+
+  get "todolists/new"
+
+  get "todolists/create"
+
+  get "todolists/update"
+
+  get "todolists/delete"
+
   get "projects/index"
 
   get "projects/get"

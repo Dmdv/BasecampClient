@@ -33,7 +33,8 @@ class Projects
   end
 
   #def todo_lists(projectid)
-  #  Todolists.new(@token, projectid).get_all
+  #  todos = Todolists.new(@token)
+  #  todos.get_all(projectid)
   #end
 
   def archive
