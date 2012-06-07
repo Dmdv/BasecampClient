@@ -1,10 +1,17 @@
 class OauthController < ApplicationController
   # gets authorization url
   def login
+
+    #client = Client.create
+    #redirect_to client.auth_code.authorize_url(:redirect_uri => Api::REDIRECTURL)
+
+    # TODO:Check token expire date and ccredentials.
+
     # if AccessToken doesn't exist, redirects to autorization page
     if TokenFactory.any?
       redirect_to :controller => 'projects', :action => 'index'
     else
+      client = Client.create
       redirect_to client.auth_code.authorize_url(:redirect_uri => Api::REDIRECTURL)
     end
   end

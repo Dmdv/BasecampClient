@@ -1,10 +1,19 @@
 class ProjectsController < ApplicationController
-  attr_reader :projects
+  attr_reader :projects, :token
   attr_accessor :project
 
   def index
-    token = TokenFactory.get_accesstoken
-    array = Projects.new(token).get_all
+    @token = TokenFactory.get_accesstoken
+    begin
+      array = Projects.new(token).get_all
+    rescue
+      TokenFactory.update_accesstoken(token)
+      @token = TokenFactory.get_accesstoken
+    end
+
+    # TODO: How to employ auth to check if the user is wrong and update token in DB
+    # response = @token.get('https://launchpad.37signals.com/authorization.json')
+
     @projects = Array.new
     array.each do |project|
       proj = Project.new
