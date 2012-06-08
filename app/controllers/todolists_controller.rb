@@ -15,10 +15,11 @@ class TodolistsController < ApplicationController
     @todolists = todos.get_items(@projectid, params[:todoid])
     @remaining = @todolists['todos']['remaining']
     @completed = @todolists['todos']['completed']
-    puts "test"
   end
 
   def new
+    @list = {}
+    @list[:name] = "name"
   end
 
   def create
