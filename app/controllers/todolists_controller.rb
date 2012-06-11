@@ -19,10 +19,12 @@ class TodolistsController < ApplicationController
 
   def new
     @list = {}
-    @list[:name] = "name"
+    @list[:name] = " enter name"
+    @list[:description] = " enter description"
   end
 
   def create
+    puts 'test'
   end
 
   def update

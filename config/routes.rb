@@ -5,7 +5,7 @@ BasecampClient::Application.routes.draw do
 
   get "todolists/new"
 
-  get "todolists/create"
+  post "todolists/create"
 
   get "todolists/update"
 

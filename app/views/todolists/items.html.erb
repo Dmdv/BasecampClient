@@ -1,4 +1,4 @@
-<h1>Todolists#items</h1>
+<h1>Todolist <%= @todolists['id'] %></h1>
 
 <table class="todolists">
   <tr>
@@ -47,58 +47,49 @@
       <%= @todolists['position'] %>
     </td>
   </tr>
-
-  <tr>
-    <td><h4>TODOS items</h4></td>
-  </tr>
-
-  <tr>
-    <td><b>Remaining:</b></td>
-    <td>
-      <% @remaining.each do |item| %>
-          <table class="items">
-            <tr>
-              <td><b>ID</b></td>
-              <td><%= item['id'] %></td>
-            </tr>
-            <tr>
-              <td><b>Content</b></td>
-              <td><%= item['content'] %></td>
-            </tr>
-            <tr>
-              <td><b>Due_at</b></td>
-              <td><%= item['due_at'] %></td>
-            </tr>
-            <tr>
-              <td><b>Created_at</b></td>
-              <td><%= item['created_at'] %></td>
-            </tr>
-            <tr>
-              <td><b>Updated_at</b></td>
-              <td><%= item['updated_at'] %></td>
-            </tr>
-            <tr>
-              <td><b>Assignee</b></td>
-              <table>
-                <tr><td><%= "item['assignee']['id']" %></td></tr>
-                <tr><td><%= "item['assignee']['type']" %></td></tr>
-                <tr><td><%= "item['assignee']['name']" %></td></tr>
-              </table>
-            </tr>
-            <tr>
-              <td><b>Position</b></td>
-              <td><%= item['position'] %></td>
-            </tr>
-            <tr>
-              <td><b>URL</b></td>
-              <td><%= item['url'] %></td>>
-            </tr>
-          </table>
-      <% end %>
-    </td>
-  </tr>
-
-
 </table>
+
+<h3>Remaining items:</h3>
+<% @remaining.each do |item| %>
+    <table class="todolists">
+      <tr>
+        <td><b>ID:</b></td>
+        <td><%= item['id'] %></td>
+      </tr>
+      <tr>
+        <td><b>Content:</b></td>
+        <td><%= item['content'] %></td>
+      </tr>
+      <tr>
+        <td><b>Due on:</b></td>
+        <td><%= item['due_on'] %></td>
+      </tr>
+      <tr>
+        <td><b>Due at:</b></td>
+        <td><%= item['due_at'] %></td>
+      </tr>
+      <tr>
+        <td><b>Created at:</b></td>
+        <td><%= item['created_at'] %></td>
+      </tr>
+      <tr>
+        <td><b>Updated at:</b></td>
+        <td><%= item['updated_at'] %></td>
+      </tr>
+      <tr>
+        <td><b>Position:</b></td>
+        <td><%= item['position'] %></td>
+      </tr>
+      <tr>
+        <td><b>Completed:</b></td>
+        <td><%= item['completed'] %></td>
+      </tr>
+      <tr>
+        <td><b>URL</b></td>
+        <td><%= link_to item['url'], item['url'] %></td>
+        >
+      </tr>
+    </table>
+<% end %>
 
 <p>Find me in app/views/todolists/items.html.erb</p>

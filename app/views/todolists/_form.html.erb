@@ -1,4 +1,11 @@
-<%= form_tag @list do |f| %>
-    <%= f.label :name %>
-    <%= f.submit %>
+<%= form_tag :action => 'create' do %>
+    <p>
+      Name:<br/>
+      <%= text_field_tag "item_name", @list[:name] %>
+    </p>
+    <p>
+      Description:<br/>
+      <%= text_field_tag "item_sescription", @list[:description] %>
+    </p>
+    <%= submit_tag "Save changes" %>
 <% end %>

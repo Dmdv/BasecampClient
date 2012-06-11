@@ -2,8 +2,8 @@
 
 <p><b>Projects: </b></p>
 
-<table class="projects">
-  <% @projects.each do |project| %>
+<% @projects.each do |project| %>
+    <table class="projects">
       <tr>
         <td><b>ID:</b></td>
         <td>
@@ -40,8 +40,8 @@
         <td><b>Todolists:</b></td>
         <td><p><%= link_to "TODO lists", :controller => "todolists", :action => "index", :id => project.id %></p></td>
       </tr>
-  <% end %>
-</table>
+    </table>
+<% end %>
 
 <p><%= link_to "Create project", projects_new_path %></p>
 

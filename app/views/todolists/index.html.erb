@@ -1,7 +1,7 @@
-<h1>Todolists#index</h1>
+<h1>Todolists</h1>
 
-<table class="todolists">
   <% @todolists.each do |todo| %>
+    <table class="todolists">
       <tr>
         <td><b>ID:</b></td>
         <td>
@@ -49,14 +49,15 @@
         </td>
       </tr>
       <tr>
-        <td><b>Show TODO items:</b></td>
+        <td><b>Items:</b></td>
         <td>
           <%= link_to "Show items",
                       :controller => "todolists", :action => "items", :id => @projectid, :todoid => todo['id'] %>
         </td>
       </tr>
+    </table>
+    <br/>
   <% end %>
-</table>
 
 <p><%= link_to "Create TODO list", todolists_new_path %></p>
 
