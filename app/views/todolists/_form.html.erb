@@ -1,11 +1,12 @@
 <%= form_tag :action => 'create' do %>
+    <%= hidden_field_tag "projectid", @opts[:projectid] %>
     <p>
       Name:<br/>
-      <%= text_field_tag "item_name", @list[:name] %>
+      <%= text_field_tag "name", @opts[:name] %>
     </p>
     <p>
       Description:<br/>
-      <%= text_field_tag "item_sescription", @list[:description] %>
+      <%= text_field_tag "description", @opts[:description] %>
     </p>
     <%= submit_tag "Save changes" %>
 <% end %>

@@ -1,95 +1,96 @@
-<h1>Todolist <%= @todolists['id'] %></h1>
+<h1>Todolist Items <%= @opts[:todolist]['id'] %></h1>
 
-<table class="todolists">
-  <tr>
-    <td><b>ID:</b></td>
-    <td>
-      <%= @todolists['id'] %>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Name:</b></td>
-    <td>
-      <%= @todolists['name'] %>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Description:</b></td>
-    <td>
-      <%= @todolists['description'] %>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Created at:</b></td>
-    <td>
-      <%= @todolists['created_at'] %>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Updated at:</b></td>
-    <td>
-      <%= @todolists['updated_at'] %>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Url:</b></td>
-    <td><a href="<%= @todolists['url'] %>"><%= @todolists['url'] %></a></td>
-  </tr>
-  <tr>
-    <td><b>Completed:</b></td>
-    <td>
-      <%= @todolists['completed'] %>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Position:</b></td>
-    <td>
-      <%= @todolists['position'] %>
-    </td>
-  </tr>
-</table>
+<h2>Parent:</h2>
+
+<%= render 'todolist' %>
+
+<h2>Items:</h2>
 
 <h3>Remaining items:</h3>
-<% @remaining.each do |item| %>
+<% @opts[:remaining].each do |item| %>
     <table class="todolists">
       <tr>
-        <td><b>ID:</b></td>
+        <td><strong>ID:</strong></td>
         <td><%= item['id'] %></td>
       </tr>
       <tr>
-        <td><b>Content:</b></td>
+        <td><strong>Content:</strong></td>
         <td><%= item['content'] %></td>
       </tr>
       <tr>
-        <td><b>Due on:</b></td>
+        <td><strong>Due on:</strong></td>
         <td><%= item['due_on'] %></td>
       </tr>
       <tr>
-        <td><b>Due at:</b></td>
+        <td><strong>Due at:</strong></td>
         <td><%= item['due_at'] %></td>
       </tr>
       <tr>
-        <td><b>Created at:</b></td>
+        <td><strong>Created at:</strong></td>
         <td><%= item['created_at'] %></td>
       </tr>
       <tr>
-        <td><b>Updated at:</b></td>
+        <td><strong>Updated at:</strong></td>
         <td><%= item['updated_at'] %></td>
       </tr>
       <tr>
-        <td><b>Position:</b></td>
+        <td><strong>Position:</strong></td>
         <td><%= item['position'] %></td>
       </tr>
       <tr>
-        <td><b>Completed:</b></td>
+        <td><strong>Completed:</strong></td>
         <td><%= item['completed'] %></td>
       </tr>
       <tr>
-        <td><b>URL</b></td>
+        <td><strong>URL</strong></td>
         <td><%= link_to item['url'], item['url'] %></td>
         >
       </tr>
     </table>
 <% end %>
+
+<h3>Completed items:</h3>
+<% @opts[:completed].each do |item| %>
+    <table class="todolists">
+      <tr>
+        <td><strong>ID:</strong></td>
+        <td><%= item['id'] %></td>
+      </tr>
+      <tr>
+        <td><strong>Content:</strong></td>
+        <td><%= item['content'] %></td>
+      </tr>
+      <tr>
+        <td><strong>Due on:</strong></td>
+        <td><%= item['due_on'] %></td>
+      </tr>
+      <tr>
+        <td><strong>Due at:</strong></td>
+        <td><%= item['due_at'] %></td>
+      </tr>
+      <tr>
+        <td><strong>Created at:</strong></td>
+        <td><%= item['created_at'] %></td>
+      </tr>
+      <tr>
+        <td><strong>Updated at:</strong></td>
+        <td><%= item['updated_at'] %></td>
+      </tr>
+      <tr>
+        <td><strong>Position:</strong></td>
+        <td><%= item['position'] %></td>
+      </tr>
+      <tr>
+        <td><strong>Completed:</strong></td>
+        <td><%= item['completed'] %></td>
+      </tr>
+      <tr>
+        <td><strong>URL</strong></td>
+        <td><%= link_to item['url'], item['url'] %></td>
+        >
+      </tr>
+    </table>
+<% end %>
+
 
 <p>Find me in app/views/todolists/items.html.erb</p>

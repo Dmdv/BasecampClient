@@ -22,7 +22,7 @@ class Projects
     self.token.delete(id, "projects/#{projectid}.json")
   end
 
-  def create(id = Account::IDD, name, description)
+  def create(name, description, id = Account::IDD)
     opts = {:name => name, :descrption => description}
     self.token.post(id, 'projects.json', opts)
   end

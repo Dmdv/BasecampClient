@@ -1,2 +1,5 @@
-<h1>Todolists#ccreate</h1>
-<p>Find me in app/views/todolists/ccreate.html.erb</p>
+<h3>New todolist was successfully created!</h3>
+
+<%= render 'items' %>
+
+<p><%= link_to "Show all todolists", :controller => "todolists", :action => "index", :id => @opts[:projectid] %></p>

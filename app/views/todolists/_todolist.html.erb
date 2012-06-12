@@ -1,0 +1,48 @@
+<%= form_tag do %>
+    <%= hidden_field_tag "projectid", @opts[:projectid] %>
+<% end %>
+
+<table class="todolists">
+  <tr>
+    <td><strong>ID:</strong></td>
+    <td>
+      <%= @opts[:todolist]['id'] %>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Name:</strong></td>
+    <td>
+      <%= @opts[:todolist]['name'] %>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Description:</strong></td>
+    <td>
+      <%= @opts[:todolist]['description'] %>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Created at:</strong></td>
+    <td>
+      <%= @opts[:todolist]['created_at'] %>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Updated at:</strong></td>
+    <td>
+      <%= @opts[:todolist]['updated_at'] %>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Completed:</strong></td>
+    <td>
+      <%= @opts[:todolist]['completed'] %>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Position:</strong></td>
+    <td>
+      <%= @opts[:todolist]['position'] %>
+    </td>
+  </tr>
+</table>

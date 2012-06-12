@@ -30,7 +30,7 @@ class OauthController < ApplicationController
     token = client.auth_code.get_token(code,
                                        :redirect_uri => Api::REDIRECTURL,
                                        :headers => {:Authorization => 'Basic some_password',
-                                                    'User-Agent' => '100 Efforts (dimos-d@yandex.ru)',
+                                                    "User-Agent" => '100 Efforts (dimos-d@yandex.ru)',
                                                     :ca_file => Rails.root.join('lib/cert.pem').to_s})
     TokenFactory.update_accesstoken(token)
   end

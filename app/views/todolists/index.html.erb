@@ -1,64 +1,65 @@
 <h1>Todolists</h1>
 
-  <% @todolists.each do |todo| %>
+  <% @opts[:todolists].each do |todo| %>
     <table class="todolists">
       <tr>
-        <td><b>ID:</b></td>
+        <td><strong>ID:</strong></td>
         <td>
           <%= todo['id'] %>
         </td>
       </tr>
       <tr>
-        <td><b>Name:</b></td>
+        <td><strong>Name:</strong></td>
         <td>
           <%= todo['name'] %>
         </td>
       </tr>
       <tr>
-        <td><b>Description:</b></td>
+        <td><strong>Description:</strong></td>
         <td>
           <%= todo['description'] %>
         </td>
       </tr>
       <tr>
-        <td><b>Created at:</b></td>
+        <td><strong>Created at:</strong></td>
         <td>
           <%= todo['created_at'] %>
         </td>
       </tr>
       <tr>
-        <td><b>Updated at:</b></td>
+        <td><strong>Updated at:</strong></td>
         <td>
           <%= todo['updated_at'] %>
         </td>
       </tr>
       <tr>
-        <td><b>Url:</b></td>
+        <td><strong>Url:</strong></td>
         <td><a href="<%= todo['url'] %>"><%= todo['url'] %></a></td>
       </tr>
       <tr>
-        <td><b>Completed:</b></td>
+        <td><strong>Completed:</strong></td>
         <td>
           <%= todo['completed'] %>
         </td>
       </tr>
       <tr>
-        <td><b>Position:</b></td>
+        <td><strong>Position:</strong></td>
         <td>
           <%= todo['position'] %>
         </td>
       </tr>
       <tr>
-        <td><b>Items:</b></td>
+        <td><strong>Items:</strong></td>
         <td>
           <%= link_to "Show items",
-                      :controller => "todolists", :action => "items", :id => @projectid, :todoid => todo['id'] %>
+                      :controller => "todolists", :action => "items", :id => @opts[:projectid], :todoid => todo['id'] %>
         </td>
       </tr>
     </table>
     <br/>
   <% end %>
 
-<p><%= link_to "Create TODO list", todolists_new_path %></p>
+<p><%= link_to "Create TODO list",
+               :controller => "todolists", :action => "new", :id => @opts[:projectid] %></p>
 
 <p>Find me in app/views/todolists/index.html.erb</p>

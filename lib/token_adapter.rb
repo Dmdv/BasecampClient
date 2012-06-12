@@ -21,10 +21,26 @@ class TokenAdapter
     JSON.parse(request.body)
   end
 
+  # How to make post request in Faraday
+  # https://github.com/technoweenie/faraday
   def post(id, path, opts = {})
     url = form_url(id, path)
-    request = @token.post(url, opts)
+
+    request = @token.post(url) do |request|
+      request.options = opts
+      request.headers['Content-Type'] = 'application/json'
+      request.headers['charset'] = 'utf-8'
+      request.body = opts[:body]
+    end
+
     JSON.parse(request.body)
+
+    # Example:
+    #opts[:headers] ||= {}
+    #opts[:headers]["Content-Type"] = 'application/json'
+    #opts[:headers]["charset"] = 'utf-8'
+    #opts[:body] = JSON.generate({ :name => 'Bob3', :description => 'sample descr' })
+    #request = @token.post(url, opts)
   end
 
   # @param [Integer] id project id
