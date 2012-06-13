@@ -1,0 +1,12 @@
+<%= form_tag :action => 'create_item' do %>
+    <%= hidden_field_tag "projectid", @opts[:projectid] %>
+    <p>
+      Content:<br/>
+      <%= text_field_tag "content", '' %>
+    </p>
+    <p>
+      Due at:<br/>
+      <%= date_select("due_at", "written_on") %>
+    </p>
+    <%= submit_tag "Save changes" %>
+<% end %>

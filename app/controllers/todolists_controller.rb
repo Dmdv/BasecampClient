@@ -22,9 +22,18 @@ class TodolistsController < ApplicationController
     options[:description] = "enter description"
   end
 
+  def new_item
+    options[:projectid]   = params[:id]
+  end
+
   def create
     options[:projectid]   = params[:projectid]
     options[:todolist]    = todos.create(params[:name], params[:description], params[:projectid])
+  end
+
+  def create_item
+    options[:projectid]   = params[:projectid]
+    #options[:todolist]    = todos.create(params[:name], params[:description], params[:projectid])
   end
 
   def update

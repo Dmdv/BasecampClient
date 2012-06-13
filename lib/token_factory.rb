@@ -10,7 +10,10 @@ class TokenFactory
   # @return [AccessToken]
   def self.get_accesstoken
     tok = Token.first
-    opts = {:access_token => tok.token, :refresh_token => tok.refresh_token, :expires_in => tok.expires_in, :expires_at => tok.expires_at}
+    opts = { :access_token => tok.token,
+             :refresh_token => tok.refresh_token,
+             :expires_in => tok.expires_in,
+             :expires_at => tok.expires_at }
     OAuth2::AccessToken.from_hash(Client.create, opts)
   end
 
