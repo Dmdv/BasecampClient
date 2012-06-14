@@ -7,10 +7,19 @@ class TodolistsController < ApplicationController
     options[:todolists] = todos.get_all(params[:id])
   end
 
+  def index_completed
+    options[:projectid] = params[:id]
+    todolist = todos.get_completed(params[:id])
+
+    options[:todolists] = todolist
+    render :template => 'index'
+  end
+
+
   def items
+    options[:projectid] = params[:id]
     todolist = todos.get_items(params[:id], params[:todoid])
 
-    options[:projectid] = params[:id]
     options[:todolist]  = todolist
     options[:remaining] = todolist['todos']['remaining']
     options[:completed] = todolist['todos']['completed']

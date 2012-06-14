@@ -1,6 +1,8 @@
 BasecampClient::Application.routes.draw do
   get "todolists/index"
 
+  get "todolists/index_completed"
+
   get "todolists/items"
 
   get "todolists/new"

@@ -1,44 +1,48 @@
 <h1>Projects#index</h1>
 
-<p><b>Projects: </b></p>
+<p><strong>Projects: </strong></p>
 
 <% @projects.each do |project| %>
     <table class="projects">
       <tr>
-        <td><b>ID:</b></td>
+        <td><strong>ID:</strong></td>
         <td>
           <%= project.id %>
         </td>
-        <td><b>Name:</b></td>
+        <td><strong>Name:</strong></td>
         <td>
           <%= project.name %>
         </td>
       </tr>
       <tr>
-        <td><b>Description:</b></td>
+        <td><strong>Description:</strong></td>
         <td>
           <%= project.description %>
         </td>
       </tr>
       <tr>
-        <td><b>Created at:</b></td>
+        <td><strong>Created at:</strong></td>
         <td>
           <%= project.created_at %>
         </td>
       </tr>
       <tr>
-        <td><b>Updated at:</b></td>
+        <td><strong>Updated at:</strong></td>
         <td>
           <%= project.updated_at %>
         </td>
       </tr>
       <tr>
-        <td><b>Url:</b></td>
+        <td><strong>Url:</strong></td>
         <td><a href="<%= project.url %>"><%= project.url %></a></td>
       </tr>
       <tr>
-        <td><b>Todolists:</b></td>
-        <td><p><%= link_to "TODO lists", :controller => "todolists", :action => "index", :id => project.id %></p></td>
+        <td><strong>Todolists:</strong></td>
+        <td><%= link_to "Show all TODO lists", :controller => "todolists", :action => "index", :id => project.id %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= link_to "Show completed TODO lists", :controller => "todolists", :action => "index_completed", :id => project.id %></td>
       </tr>
     </table>
 <% end %>
