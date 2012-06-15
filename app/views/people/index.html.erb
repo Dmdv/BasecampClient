@@ -1,2 +1,103 @@
-<h1>People#index</h1>
+<h1><%= @opts[:caption] %></h1>
+
+<% @people.each do |man| %>
+
+    <table class="projects">
+
+      <tr>
+        <td><strong>ID:</strong></td>
+        <td>
+          <%= man['id'] %>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Name:</strong></td>
+        <td>
+          <%= man['name'] %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong>Email:</strong></td>
+        <td>
+          <%= man['email_address'] %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong>Avatar url:</strong></td>
+        <td>
+          <%= link_to man['avatar_url'], man['avatar_url'] %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong>Updated at:</strong></td>
+        <td>
+          <%= man['updated_at'] %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong>Url:</strong></td>
+        <td>
+          <%= man['url'] %>
+        </td>
+      </tr>
+
+    </table>
+
+    <% if man.has_key?("events"); %>
+        <h3>Events:</h3>
+
+        <table class="projects">
+          <tr>
+            <td><strong>Counts:</strong></td>
+            <td>
+              <%= man['events']['count'] %>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Updated at:</strong></td>
+            <td>
+              <%= man['events']['updated_at'] %>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Url:</strong></td>
+            <td>
+              <%= link_to man['events']['url'], man['events']['url'] %>
+            </td>
+          </tr>
+        </table>
+    <% end %>
+
+    <% if man.has_key?("assigned_todos"); %>
+        <h3>Assigned TODOs:</h3>
+
+        <table class="projects">
+          <tr>
+            <td><strong>Counts:</strong></td>
+            <td>
+              <%= man['assigned_todos']['count'] %>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Updated at:</strong></td>
+            <td>
+              <%= man['assigned_todos']['updated_at'] %>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Url:</strong></td>
+            <td>
+              <%= link_to man['assigned_todos']['url'], man['assigned_todos']['url'] %>
+            </td>
+          </tr>
+        </table>
+    <% end %>
+
+
+<% end %>
+
 <p>Find me in app/views/people/index.html.erb</p>

@@ -1,4 +1,4 @@
-class People < BaseToken
+class Peoples < BaseToken
 
   def get_all(id = Account::IDD)
     @token.get(id, "people.json")

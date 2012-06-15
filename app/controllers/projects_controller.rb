@@ -2,15 +2,12 @@ class ProjectsController < ApplicationController
 
   attr_accessor :project, :projects
 
-  def projects
+  def lib
     @accessor ||= Projects.new
   end
 
   def index
-    @projects = projects.get_all
-
-    # TODO: How to employ auth to check if the user is wrong and update token in DB
-    # response = @token.get('https://launchpad.37signals.com/authorization.json')
+    @projects = lib.get_all
   end
 
   def get
