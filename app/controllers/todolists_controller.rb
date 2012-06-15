@@ -3,18 +3,17 @@ class TodolistsController < ApplicationController
   attr_reader :opts
 
   def index
+    options[:caption] = 'All Todo lists'
     options[:projectid] = params[:id]
     options[:todolists] = todos.get_all(params[:id])
   end
 
   def index_completed
+    options[:caption] = 'Completed Todo lists'
     options[:projectid] = params[:id]
-    todolist = todos.get_completed(params[:id])
-
-    options[:todolists] = todolist
-    render :template => 'index'
+    options[:todolists] = todos.get_completed(params[:id])
+    render :template => 'todolists/index'
   end
-
 
   def items
     options[:projectid] = params[:id]
