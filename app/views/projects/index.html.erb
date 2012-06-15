@@ -7,42 +7,42 @@
       <tr>
         <td><strong>ID:</strong></td>
         <td>
-          <%= project.id %>
+          <%= project['id'] %>
         </td>
         <td><strong>Name:</strong></td>
         <td>
-          <%= project.name %>
+          <%= project['name'] %>
         </td>
       </tr>
       <tr>
         <td><strong>Description:</strong></td>
         <td>
-          <%= project.description %>
+          <%= project['description'] %>
         </td>
       </tr>
       <tr>
         <td><strong>Created at:</strong></td>
         <td>
-          <%= project.created_at %>
+          <%= project['created_at'] %>
         </td>
       </tr>
       <tr>
         <td><strong>Updated at:</strong></td>
         <td>
-          <%= project.updated_at %>
+          <%= project['updated_at'] %>
         </td>
       </tr>
       <tr>
         <td><strong>Url:</strong></td>
-        <td><a href="<%= project.url %>"><%= project.url %></a></td>
+        <td><a href="<%= project['url'] %>"><%= project['url'] %></a></td>
       </tr>
       <tr>
         <td><strong>Todolists:</strong></td>
-        <td><%= link_to "Show all TODO lists", :controller => "todolists", :action => "index", :id => project.id %></td>
+        <td><%= link_to "Show all TODO lists", :controller => "todolists", :action => "index", :id => project['id'] %></td>
       </tr>
       <tr>
         <td></td>
-        <td><%= link_to "Show completed TODO lists", :controller => "todolists", :action => "index_completed", :id => project.id %></td>
+        <td><%= link_to "Show completed TODO lists", :controller => "todolists", :action => "index_completed", :id => project['id'] %></td>
       </tr>
     </table>
 <% end %>

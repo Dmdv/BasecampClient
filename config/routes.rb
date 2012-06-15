@@ -1,4 +1,12 @@
 BasecampClient::Application.routes.draw do
+  get "people/index"
+
+  get "people/person"
+
+  get "people/delete"
+
+  get "people/me"
+
   get "todolists/index"
 
   get "todolists/index_completed"

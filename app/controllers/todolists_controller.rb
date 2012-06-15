@@ -2,6 +2,10 @@ class TodolistsController < ApplicationController
 
   attr_reader :opts
 
+  def todos
+    @todos ||= Todolists.new
+  end
+
   def index
     options[:caption] = 'All Todo lists'
     options[:projectid] = params[:id]
@@ -52,10 +56,5 @@ class TodolistsController < ApplicationController
 
   def options
     @opts ||= Hash.new
-  end
-
-  def todos
-    token = TokenFactory.get_accesstoken
-    Todolists.new(token)
   end
 end

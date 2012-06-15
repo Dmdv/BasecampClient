@@ -1,10 +1,4 @@
-class Todolists
-  attr_reader :token
-
-  # @param [AccessToken] token access token
-  def initialize(token)
-    @token = TokenAdapter.new(token)
-  end
+class Todolists < BaseToken
 
   # Will return all todolists with remaining todos on them sorted by position
   # @param [Integer] projectid returns project by id
