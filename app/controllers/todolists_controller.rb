@@ -26,7 +26,6 @@ class TodolistsController < ApplicationController
   def items
     options[:projectid] = params[:id]
     todolist = lib.get_items(params[:id], params[:todoid])
-
     options[:todolist] = todolist
     options[:remaining] = todolist['todos']['remaining']
     options[:completed] = todolist['todos']['completed']
@@ -40,16 +39,29 @@ class TodolistsController < ApplicationController
 
   def new_item
     options[:projectid] = params[:id]
+    options[:people] = Peoples.new.get_all.collect {|p| [ p["name"], p["id"] ] }
+
+    # possible way to create in view.
+    # Peoples.new.get_all {|p| [ p.name, p.id ] }
+    puts ""
   end
 
   def create
     options[:projectid] = params[:projectid]
+    test = lib.create(params[:name], params[:description], params[:projectid])
     options[:todolist] = lib.create(params[:name], params[:description], params[:projectid])
   end
 
   def create_item
-    options[:projectid] = params[:projectid]
-    #options[:todolist]    = todos.create(params[:name], params[:description], params[:projectid])
+
+    pars = {}
+    pars[:content]  = params[:content]
+    pars[:due_at]   = params[:due_at]
+    pars[:assignee_id]  = params[:assignee_id]
+    pars[:assignee_type]  = "Person"
+
+    Todos.new.create(pars, params[:projectid], params[:todolistid])
+
   end
 
   def update

@@ -17,8 +17,17 @@ class TokenAdapter
 
   def put(id, path, opts = {})
     url = form_url(id, path)
-    request = @token.put(url, opts)
+    #request = @token.put(url, opts)
+
+    request = @token.put(url) do |request|
+      request.options = opts
+      request.headers['Content-Type'] = 'application/json'
+      request.headers['charset'] = 'utf-8'
+      request.body = opts[:body]
+    end
+
     JSON.parse(request.body)
+
   end
 
   # How to make post request in Faraday

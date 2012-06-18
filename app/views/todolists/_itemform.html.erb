@@ -8,5 +8,9 @@
       Due at:<br/>
       <%= date_select("due_at", "written_on") %>
     </p>
+    <p>
+      Select assignee:
+      <%= select_tag "assignee_id", options_for_select(@opts[:people]), :include_blank => true %>
+    </p>
     <%= submit_tag "Save changes" %>
 <% end %>
