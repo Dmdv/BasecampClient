@@ -7,7 +7,7 @@
 <h2>Items:</h2>
 
 <h3>Remaining items:</h3>
-<% @opts[:remaining].each do |item| %>
+<% @opts[:todolist]['todos']['remaining'].each do |item| %>
     <table class="todolists">
       <tr>
         <td><strong>ID:</strong></td>
@@ -44,13 +44,12 @@
       <tr>
         <td><strong>URL</strong></td>
         <td><%= link_to item['url'], item['url'] %></td>
-        >
       </tr>
     </table>
 <% end %>
 
 <h3>Completed items:</h3>
-<% @opts[:completed].each do |item| %>
+<% @opts[:todolist]['todos']['completed'].each do |item| %>
     <table class="todolists">
       <tr>
         <td><strong>ID:</strong></td>
@@ -87,7 +86,6 @@
       <tr>
         <td><strong>URL</strong></td>
         <td><%= link_to item['url'], item['url'] %></td>
-        >
       </tr>
     </table>
 <% end %>

@@ -1,6 +1,6 @@
 class TodolistsController < ApplicationController
 
-  attr_reader :opts
+  attr_accessor :opts
 
   def lib
     @todos ||= Todolists.new
@@ -48,7 +48,6 @@ class TodolistsController < ApplicationController
 
   def create
     options[:projectid] = params[:projectid]
-    test = lib.create(params[:name], params[:description], params[:projectid])
     options[:todolist] = lib.create(params[:name], params[:description], params[:projectid])
   end
 

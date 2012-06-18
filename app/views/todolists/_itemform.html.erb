@@ -1,3 +1,5 @@
+<% # Form to create _todo item. %>
+
 <%= form_tag :action => 'create_item' do %>
     <%= hidden_field_tag "projectid", @opts[:projectid] %>
     <p>
