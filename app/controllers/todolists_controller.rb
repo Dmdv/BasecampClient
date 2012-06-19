@@ -73,7 +73,7 @@ class TodolistsController < ApplicationController
   end
 
   def delete_item
-    #Todos.new.delete(params[:projectid], params[:todoid])
+    Todos.new.delete(params[:projectid], params[:todoid])
   end
 
 end

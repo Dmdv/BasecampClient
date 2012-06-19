@@ -21,6 +21,8 @@ BasecampClient::Application.routes.draw do
 
   post "todolists/create_item"
 
+  get "todolists/delete_item"
+
   get "todolists/update"
 
   get "todolists/delete"

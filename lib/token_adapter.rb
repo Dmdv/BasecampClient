@@ -57,9 +57,9 @@ class TokenAdapter
 
   # @param [Integer] id project id
   # @param [String] path url path
-  def delete(id, path, opts = {})
+  def delete(id, path)
     url = form_url(id, path)
-    request = @token.delete(url, opts)
-    #JSON.parse(request.body)
+    response = @token.delete(url)
+    # if response.env[:status] = 204
   end
 end

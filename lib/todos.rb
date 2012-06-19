@@ -45,7 +45,8 @@ class Todos < BaseToken
 
   # deletes _todo item.
   def delete(projectid, todoid, id = Account::IDD)
-    @token.delete(id, "projects/#{projectid}/todos/#{todoid}.json")
+    response = @token.delete(id, "projects/#{projectid}/todos/#{todoid}.json")
+    puts ""
   end
 
 end
