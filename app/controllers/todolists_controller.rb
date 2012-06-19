@@ -12,31 +12,31 @@ class TodolistsController < ApplicationController
 
   def index
     options[:caption] = 'All Todo lists'
-    options[:projectid] = params[:id]
+    options[:projectid] = params[:projectid]
 
-    options[:todolists] = lib.get_all(params[:id])
+    options[:todolists] = lib.get_all(params[:projectid])
   end
 
   def index_completed
     options[:caption] = 'Completed Todo lists'
-    options[:projectid] = params[:id]
+    options[:projectid] = params[:projectid]
 
-    options[:todolists] = lib.get_completed(params[:id])
+    options[:todolists] = lib.get_completed(params[:projectid])
     render :template => 'todolists/index'
   end
 
   def items
     options[:caption] = 'Todolist items'
-    options[:projectid] = params[:id]
+    options[:projectid] = params[:projectid]
 
-    todolist = lib.get_items(params[:id], params[:todoid])
+    todolist = lib.get_items(params[:projectid], params[:todoid])
     options[:todolist] = todolist
     options[:remaining] = todolist['todos']['remaining']
     options[:completed] = todolist['todos']['completed']
   end
 
   def new
-    options[:projectid] = params[:id]
+    options[:projectid] = params[:projectid]
     options[:name] = "enter name"
     options[:description] = "enter description"
   end
@@ -47,7 +47,7 @@ class TodolistsController < ApplicationController
   end
 
   def new_item
-    options[:projectid] = params[:id]
+    options[:projectid] = params[:projectid]
     options[:people] = Peoples.new.get_all.collect {|p| [ p["name"], p["id"] ] }
 
     # possible way to create in view.
@@ -73,6 +73,7 @@ class TodolistsController < ApplicationController
   end
 
   def delete_item
+    #Todos.new.delete(params[:projectid], params[:todoid])
   end
 
 end

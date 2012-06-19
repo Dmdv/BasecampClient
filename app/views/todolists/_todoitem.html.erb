@@ -35,4 +35,12 @@
     <td><strong>URL</strong></td>
     <td><%= link_to @item['url'], @item['url'] %></td>
   </tr>
+  <tr>
+    <td><strong></strong></td>
+    <td><%= link_to "Delete item",
+                    :controller => 'todolists',
+                    :action => 'delete_item',
+                    :projectid => @opts[:projectid],
+                    :todoid => @item['id']%></td>
+  </tr>
 </table>
