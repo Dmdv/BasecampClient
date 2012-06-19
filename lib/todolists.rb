@@ -24,7 +24,7 @@ class Todolists < BaseToken
 
   # will create a new todolist from the parameters passed.
   def create(name, description, projectid, opts = {}, id = Account::IDD)
-    opts[:body] = JSON.generate({:name => name, :description => description})
-    @token.post(id, "projects/#{projectid}/todolists.json", opts)
+    body = {:name => name, :description => description}
+    @token.post(id, "projects/#{projectid}/todolists.json", JSON.generate(body))
   end
 end

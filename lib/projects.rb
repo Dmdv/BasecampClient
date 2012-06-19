@@ -17,13 +17,13 @@ class Projects < BaseToken
   end
 
   def create(name, description, id = Account::IDD)
-    opts = {:name => name, :descrption => description}
-    @token.post(id, 'projects.json', opts)
+    body = {:name => name, :descrption => description}
+    @token.post(id, 'projects.json', JSON.generate(body))
   end
 
   def update(projectid, name, description, id = Account::IDD)
-    opts = {:name => name, :descrption => description}
-    @token.put(id, "projects/#{projectid}.json", opts)
+    body = {:name => name, :descrption => description}
+    @token.put(id, "projects/#{projectid}.json", JSON.generate(body))
   end
 
   #def todo_lists(projectid)

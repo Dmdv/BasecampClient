@@ -6,21 +6,20 @@ class Todos < BaseToken
   end
 
   # will create a new _todo from the parameters passed.
-  def create(params, projectid, todolistid, opts = {}, id = Account::IDD)
+  def create(params, projectid, todolistid, id = Account::IDD)
 
-    opts[:body] = JSON.generate(
+    body =
         {
-            :content  => params[:content],
-            :due_at   => params[:due_at],
+            :content => params[:content],
+            :due_at => params[:due_at],
             :assignee =>
                 {
                     :id => params[:assignee_id],
                     :type => params[:assignee_type]
                 }
         }
-    )
 
-    @token.post(id, "projects/#{projectid}/todolists/#{todolistid}/todos.json", opts)
+    @token.post(id, "projects/#{projectid}/todolists/#{todolistid}/todos.json", JSON.generate(body))
 
   end
 
