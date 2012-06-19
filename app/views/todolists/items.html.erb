@@ -8,86 +8,14 @@
 
 <h3>Remaining items:</h3>
 <% @opts[:todolist]['todos']['remaining'].each do |item| %>
-    <table class="todolists">
-      <tr>
-        <td><strong>ID:</strong></td>
-        <td><%= item['id'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Content:</strong></td>
-        <td><%= item['content'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Due on:</strong></td>
-        <td><%= item['due_on'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Due at:</strong></td>
-        <td><%= item['due_at'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Created at:</strong></td>
-        <td><%= item['created_at'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Updated at:</strong></td>
-        <td><%= item['updated_at'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Position:</strong></td>
-        <td><%= item['position'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Completed:</strong></td>
-        <td><%= item['completed'] %></td>
-      </tr>
-      <tr>
-        <td><strong>URL</strong></td>
-        <td><%= link_to item['url'], item['url'] %></td>
-      </tr>
-    </table>
+    <% @item = item %>
+    <%= render :partial => 'todoitem' %>
 <% end %>
 
 <h3>Completed items:</h3>
 <% @opts[:todolist]['todos']['completed'].each do |item| %>
-    <table class="todolists">
-      <tr>
-        <td><strong>ID:</strong></td>
-        <td><%= item['id'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Content:</strong></td>
-        <td><%= item['content'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Due on:</strong></td>
-        <td><%= item['due_on'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Due at:</strong></td>
-        <td><%= item['due_at'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Created at:</strong></td>
-        <td><%= item['created_at'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Updated at:</strong></td>
-        <td><%= item['updated_at'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Position:</strong></td>
-        <td><%= item['position'] %></td>
-      </tr>
-      <tr>
-        <td><strong>Completed:</strong></td>
-        <td><%= item['completed'] %></td>
-      </tr>
-      <tr>
-        <td><strong>URL</strong></td>
-        <td><%= link_to item['url'], item['url'] %></td>
-      </tr>
-    </table>
+    <% @item = item %>
+    <%= render :partial => 'todoitem' %>
 <% end %>
 
 

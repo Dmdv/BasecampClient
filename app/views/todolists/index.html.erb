@@ -1,5 +1,8 @@
 <h1> <%= @opts[:caption] %></h1>
 
+<p><%= link_to "Create TODO list",
+               :controller => "todolists", :action => "new", :id => @opts[:projectid] %></p>
+
   <% @opts[:todolists].each do |todo| %>
     <table class="todolists">
       <tr>
@@ -58,8 +61,5 @@
     </table>
     <br/>
   <% end %>
-
-<p><%= link_to "Create TODO list",
-               :controller => "todolists", :action => "new", :id => @opts[:projectid] %></p>
 
 <p>Find me in app/views/todolists/index.html.erb</p>

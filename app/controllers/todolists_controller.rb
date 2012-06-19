@@ -71,4 +71,8 @@ class TodolistsController < ApplicationController
 
   def delete
   end
+
+  def delete_item
+  end
+
 end
