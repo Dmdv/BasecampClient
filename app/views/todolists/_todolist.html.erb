@@ -47,6 +47,10 @@
   </tr>
 </table>
 
-<%= link_to "Add new todo item", :controller => 'todolists', :action => 'new_item', :projectid => @opts[:projectid] %>
+<%= link_to "Add new todo item",
+            :controller => 'todolists',
+            :action     => 'new_item',
+            :projectid  => @opts[:projectid],
+            :todolistid => @opts[:todolist]['id'] %>
 
 

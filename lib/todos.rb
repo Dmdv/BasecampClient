@@ -1,3 +1,5 @@
+require 'Date'
+
 class Todos < BaseToken
 
   # returns _todo item.
@@ -7,6 +9,11 @@ class Todos < BaseToken
 
   # will create a new _todo from the parameters passed.
   def create(params, projectid, todolistid, id = Account::IDD)
+
+    d = Date.parse(params[:due_at])
+    d2 = d.iso8601
+
+    params[:due_at]
 
     body =
         {

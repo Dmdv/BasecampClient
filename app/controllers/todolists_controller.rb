@@ -48,6 +48,7 @@ class TodolistsController < ApplicationController
 
   def new_item
     options[:projectid] = params[:projectid]
+    options[:todolistid] = params[:todolistid]
     options[:people] = Peoples.new.get_all.collect {|p| [ p["name"], p["id"] ] }
 
     # possible way to create in view.

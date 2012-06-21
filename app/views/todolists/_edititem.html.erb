@@ -1,5 +1,6 @@
 <%= form_tag :action => 'create_item' do %>
     <%= hidden_field_tag "projectid", @opts[:projectid] %>
+    <%= hidden_field_tag "todolistid", @opts[:todolistid] %>
     <p>
       Content:<br/>
       <%= text_field_tag "content", '' %>
