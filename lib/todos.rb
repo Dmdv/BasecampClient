@@ -10,15 +10,13 @@ class Todos < BaseToken
   # will create a new _todo from the parameters passed.
   def create(params, projectid, todolistid, id = Account::IDD)
 
-    d = Date.parse(params[:due_at])
-    d2 = d.iso8601
-
-    params[:due_at]
+    data = params[:due_at]
+    data = Date.parse(data.to_a.sort.collect{|c| c[1]}.join("-"))
 
     body =
         {
             :content => params[:content],
-            :due_at => params[:due_at],
+            :due_at => data,
             :assignee =>
                 {
                     :id => params[:assignee_id],
@@ -53,7 +51,5 @@ class Todos < BaseToken
   # deletes _todo item.
   def delete(projectid, todoid, id = Account::IDD)
     response = @token.delete(id, "projects/#{projectid}/todos/#{todoid}.json")
-    puts ""
   end
-
 end

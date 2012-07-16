@@ -56,6 +56,7 @@ class TodolistsController < ApplicationController
     puts ""
   end
 
+  # TODO: Create create_item view with redirection to all todos in the current todolist
   def create_item
 
     pars = {}
