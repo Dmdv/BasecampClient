@@ -1,6 +1,8 @@
 BasecampClient::Application.routes.draw do
   get "people/index"
 
+  match "people" => "people#index"
+
   get "people/person"
 
   get "people/delete"
@@ -8,6 +10,8 @@ BasecampClient::Application.routes.draw do
   get "people/me"
 
   get "todolists/index"
+
+  match "todolists" => "todolists#index"
 
   get "todolists/index_completed"
 
@@ -29,6 +33,8 @@ BasecampClient::Application.routes.draw do
 
   get "projects/index"
 
+  match "projects" => "projects#index"
+
   get "projects/get"
 
   get "projects/new"
@@ -48,7 +54,7 @@ BasecampClient::Application.routes.draw do
 
   match 'index' => 'oauth#login'
 
-  match 'projects' => 'oauth#login'
+  # match 'projects' => 'oauth#login'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
