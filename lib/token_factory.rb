@@ -26,9 +26,9 @@ class TokenFactory
                        expires_in: token.expires_in, expires_at: token.expires_at)
     unless tok.nil?
       Token.delete_all
-    else
       tok.save
     end
+    token
   end
 
   # @return [AccessToken]
@@ -46,11 +46,9 @@ class TokenFactory
     token = OAuth2::AccessToken.from_hash(Client.create, opts)
 
     if token.expired?
-      token.refresh!
       puts "Token expired, refreshing..."
+      update_accesstoken token.refresh! type: "refresh"
     end
-
-    return token
   end
 
   # @return [Boolean]
