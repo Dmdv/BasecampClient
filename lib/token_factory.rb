@@ -1,20 +1,56 @@
 class TokenFactory
+
+  # @param [Integer] code
+  # This code is received during 2 round oauth authorization.
+  def self.create_token(code)
+    if code.nil?
+      raise ArgumentError, "code is nill in TokenFactory.create_token"
+    end
+
+    client = Client.create
+    token = client.auth_code.get_token(code,
+                                       :redirect_uri => Api::REDIRECTURL,
+                                       :headers => {:Authorization => 'Basic some_password',
+                                                    "User-Agent" => '100 Efforts (dimos-d@yandex.ru)',
+                                                    :ca_file => Rails.root.join('lib/cert.pem').to_s})
+    update_accesstoken(token)
+  end
+
   # @param [AccessToken] token Updates AccessToken on autorization.
   def self.update_accesstoken(token)
-    Token.delete_all
+    if token.nil?
+      raise ArgumentError, "Token is nill in TokenFactory.update_accesstoken"
+    end
+
     tok = Token.create(token: token.token, refresh_token: token.refresh_token,
                        expires_in: token.expires_in, expires_at: token.expires_at)
-    tok.save
+    unless tok.nil?
+      Token.delete_all
+    else
+      tok.save
+    end
   end
 
   # @return [AccessToken]
   def self.get_accesstoken
     tok = Token.first
+
+    if tok.nil?
+      raise ArgumentError, "Token is nill in TokenFactory.get_accesstoken"
+    end
+
     opts = { :access_token => tok.token,
              :refresh_token => tok.refresh_token,
              :expires_in => tok.expires_in,
              :expires_at => tok.expires_at }
-    OAuth2::AccessToken.from_hash(Client.create, opts)
+    token = OAuth2::AccessToken.from_hash(Client.create, opts)
+
+    if token.expired?
+      token.refresh!
+      puts "Token expired, refreshing..."
+    end
+
+    return token
   end
 
   # @return [Boolean]

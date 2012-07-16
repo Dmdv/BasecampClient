@@ -18,21 +18,9 @@ class OauthController < ApplicationController
 
   # saves code to session and redirects to token creation
   def request_token
-    code = params[:code].to_s
-    create_token(code)
+    TokenFactory.create_token(params[:code].to_s)
     # After the code has been received, redirects to projects.
     redirect_to :controller => 'projects', :action => 'index'
-  end
-
-  # @param [Integer] code
-  def create_token(code)
-    client = Client.create
-    token = client.auth_code.get_token(code,
-                                       :redirect_uri => Api::REDIRECTURL,
-                                       :headers => {:Authorization => 'Basic some_password',
-                                                    "User-Agent" => '100 Efforts (dimos-d@yandex.ru)',
-                                                    :ca_file => Rails.root.join('lib/cert.pem').to_s})
-    TokenFactory.update_accesstoken(token)
   end
 end
 
