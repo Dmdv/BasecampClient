@@ -16,21 +16,6 @@ class TokenFactory
     update_accesstoken(token)
   end
 
-  # @param [AccessToken] token Updates AccessToken on autorization.
-  def self.update_accesstoken(token)
-    if token.nil?
-      raise ArgumentError, "Token is nill in TokenFactory.update_accesstoken"
-    end
-
-    tok = Token.create(token: token.token, refresh_token: token.refresh_token,
-                       expires_in: token.expires_in, expires_at: token.expires_at)
-    unless tok.nil?
-      Token.delete_all
-      tok.save
-    end
-    token
-  end
-
   # @return [AccessToken]
   def self.get_accesstoken
     tok = Token.first
@@ -39,20 +24,47 @@ class TokenFactory
       raise ArgumentError, "Token is nill in TokenFactory.get_accesstoken"
     end
 
-    opts = { :access_token => tok.token,
-             :refresh_token => tok.refresh_token,
-             :expires_in => tok.expires_in,
-             :expires_at => tok.expires_at }
-    token = OAuth2::AccessToken.from_hash(Client.create, opts)
+    token = OAuth2::AccessToken.from_hash(
+        Client.create, {:access_token => tok.token,
+                        :refresh_token => tok.refresh_token,
+                        :expires_in => tok.expires_in,
+                        :expires_at => tok.expires_at }
+    )
 
     if token.expired?
       puts "Token expired, refreshing..."
-      update_accesstoken token.refresh! type: "refresh"
+      newtoken = token.refresh! :type => "refresh"
+      token = update_accesstoken(newtoken, tok)
     end
+
+    token
   end
 
   # @return [Boolean]
   def self.any?
     Token.any?
   end
+
+  private
+
+    # @param [AccessToken] token Updates AccessToken on autorization.
+  def self.update_accesstoken(token, old_token = nil)
+    if token.nil?
+      raise ArgumentError, "Token is nill in TokenFactory.update_accesstoken"
+    end
+
+    unless old_token.nil?
+      old_tok = Token.find_by_expires_at old_token.expires_at
+      unless old_tok.nil?
+        old_tok.delete
+      end
+    end
+
+    Token.create( token: token.token,
+                  refresh_token: token.refresh_token,
+                  expires_in: token.expires_in,
+                  expires_at: token.expires_at )
+    token
+  end
+
 end
