@@ -7,16 +7,15 @@ class TokenAdapter
     @token = token
   end
 
-  # @param [Integer] id project id
   # @param [String] path url path
-  def get(id, path, opts = {})
-    url = form_url(id, path)
+  def get(path, opts = {})
+    url = form_url(path)
     request = @token.get(url, opts)
     JSON.parse(request.body)
   end
 
-  def put(id, path, body)
-    url = form_url(id, path)
+  def put(path, body)
+    url = form_url(path)
     request = @token.put(url) do |req|
       req.headers['Content-Type'] = 'application/json'
       req.headers['charset'] = 'utf-8'
@@ -44,8 +43,8 @@ class TokenAdapter
   #opts[:body] = JSON.generate({ :name => 'Bob3', :description => 'sample descr' })
   #request = @token.post(url, opts)
 
-  def post(id, path, body)
-    url = form_url(id, path)
+  def post(path, body)
+    url = form_url(path)
     request = @token.post(url) do |req|
       req.headers['Content-Type'] = 'application/json'
       req.headers['charset'] = 'utf-8'
@@ -55,10 +54,9 @@ class TokenAdapter
     JSON.parse(request.body)
   end
 
-  # @param [Integer] id project id
   # @param [String] path url path
-  def delete(id, path)
-    url = form_url(id, path)
+  def delete(path)
+    url = form_url(path)
     response = @token.delete(url)
     # if response.env[:status] = 204
   end

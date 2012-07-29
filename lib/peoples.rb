@@ -1,20 +1,21 @@
 class Peoples < BaseToken
 
-  def get_all(id = Account::IDD)
-    @token.get(id, "people.json")
+  def get_all
+    @token.get("people.json")
   end
 
-  def get_person(personid, id = Account::IDD)
-    @token.get(id, "people/#{personid}.json")
+  # @param [Int] personid
+  def get_person(personid)
+    @token.get("people/#{personid}.json")
   end
 
 
-  def get_me(id = Account::IDD)
-    @token.get(id, "people/me.json")
+  def get_me
+    @token.get("people/me.json")
   end
 
-  def delete(personid, id = Account::IDD)
-    @token.delete(id, "people/#{personid}.json")
+  def delete(personid)
+    @token.delete("people/#{personid}.json")
   end
 
 end

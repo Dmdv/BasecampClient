@@ -3,12 +3,12 @@ require 'Date'
 class Todos < BaseToken
 
   # returns _todo item.
-  def get_single(projectid, todoid, id = Account::IDD)
-    @token.get(id, "projects/#{projectid}/todos/#{todoid}.json")
+  def get_single(projectid, todoid)
+    @token.get("projects/#{projectid}/todos/#{todoid}.json")
   end
 
   # will create a new _todo from the parameters passed.
-  def create(params, projectid, todolistid, id = Account::IDD)
+  def create(params, projectid, todolistid)
 
     data = params[:due_at]
     data = Date.parse(data.to_a.sort.collect{|c| c[1]}.join("-"))
@@ -24,12 +24,12 @@ class Todos < BaseToken
                 }
         }
 
-    @token.post(id, "projects/#{projectid}/todolists/#{todolistid}/todos.json", JSON.generate(body))
+    @token.post("projects/#{projectid}/todolists/#{todolistid}/todos.json", JSON.generate(body))
 
   end
 
   # updates _todo item.
-  def update(params, projectid, todoid, opts = {}, id = Account::IDD)
+  def update(params, projectid, todoid, opts = {})
 
     opts[:body] = JSON.generate(
         {
@@ -44,12 +44,12 @@ class Todos < BaseToken
         }
     )
 
-    @token.put(id, "projects/#{projectid}/todos/#{todoid}.json", opts)
+    @token.put("projects/#{projectid}/todos/#{todoid}.json", opts)
 
   end
 
   # deletes _todo item.
-  def delete(projectid, todoid, id = Account::IDD)
-    response = @token.delete(id, "projects/#{projectid}/todos/#{todoid}.json")
+  def delete(projectid, todoid)
+    @token.delete("projects/#{projectid}/todos/#{todoid}.json")
   end
 end

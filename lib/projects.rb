@@ -2,28 +2,28 @@
 class Projects < BaseToken
 
   # @param [Project IDD] id project id
-  def get_all(id = Account::IDD)
-    @token.get(id, 'projects.json')
+  def get_all
+    @token.get('projects.json')
   end
 
   # @param [Integer] projectid returns project by id
-  def get_single(projectid, id = Account::IDD)
-    @token.get(id, "projects/#{projectid}.json")
+  def get_single(projectid)
+    @token.get("projects/#{projectid}.json")
   end
 
   # @param [Integer] projectid deletes project by id
-  def delete(projectid, id = Account::IDD)
-    @token.delete(id, "projects/#{projectid}.json")
+  def delete(projectid)
+    @token.delete("projects/#{projectid}.json")
   end
 
-  def create(name, description, id = Account::IDD)
+  def create(name, description)
     body = {:name => name, :descrption => description}
-    @token.post(id, 'projects.json', JSON.generate(body))
+    @token.post('projects.json', JSON.generate(body))
   end
 
-  def update(projectid, name, description, id = Account::IDD)
+  def update(projectid, name, description)
     body = {:name => name, :descrption => description}
-    @token.put(id, "projects/#{projectid}.json", JSON.generate(body))
+    @token.put("projects/#{projectid}.json", JSON.generate(body))
   end
 
   #def todo_lists(projectid)
