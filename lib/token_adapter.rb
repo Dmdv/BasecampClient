@@ -1,5 +1,5 @@
 class TokenAdapter
-  include Api
+  include Settings
   attr_reader :token
 
   # @param [AccessToken] token access token

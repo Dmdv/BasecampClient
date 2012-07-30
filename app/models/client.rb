@@ -6,6 +6,6 @@ class Client
                 :token_method => :post,
                 :raise_errors => true,
                 :site => 'https://launchpad.37signals.com'}
-    @client ||= BaseClient.new(Api::CLIENTID, Api::CLIENTSECRET, @options)
+    @client ||= BaseClient.new(Settings::CLIENTID, Settings::CLIENTSECRET, @options)
   end
 end

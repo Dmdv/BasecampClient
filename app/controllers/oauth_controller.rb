@@ -1,18 +1,21 @@
 class OauthController < ApplicationController
+
   # gets authorization url
   def login
 
-    #client = Client.create
-    #redirect_to client.auth_code.authorize_url(:redirect_uri => Api::REDIRECTURL)
-
-    # TODO:Check token expire date and ccredentials.
+    # This is used in admin mode, to regenerate new token.
+    if Settings::CHANGEUSER
+      client = Client.create
+      redirect_to client.auth_code.authorize_url(:redirect_uri => Settings::REDIRECTURL)
+      return
+    end
 
     # if AccessToken doesn't exist, redirects to autorization page
     if TokenFactory.any?
       redirect_to :controller => 'projects', :action => 'index'
     else
       client = Client.create
-      redirect_to client.auth_code.authorize_url(:redirect_uri => Api::REDIRECTURL)
+      redirect_to client.auth_code.authorize_url(:redirect_uri => Settings::REDIRECTURL)
     end
   end
 
@@ -24,7 +27,7 @@ class OauthController < ApplicationController
   end
 end
 
-require "api.rb"
+require "settings.rb"
 
 # http://developer.37signals.com
 # https://github.com/oauth/oauth-ruby
