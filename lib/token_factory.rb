@@ -31,6 +31,9 @@ class TokenFactory
                         :expires_at => tok.expires_at }
     )
 
+    response = token.get('https://launchpad.37signals.com/authorization.json')
+    body = JSON.parse(response.body)
+
     if token.expired?
       puts "Token expired, refreshing..."
       newtoken = token.refresh! :type => "refresh"

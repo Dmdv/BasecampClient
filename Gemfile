@@ -38,3 +38,6 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem 'oauth2'
+gem 'delayed_job'
+gem 'delayed_job_active_record'
+gem 'daemons'

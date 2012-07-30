@@ -3,7 +3,13 @@ class Projects < BaseToken
 
   # @param [Project IDD] id project id
   def get_all
-    @token.get('projects.json')
+    begin
+      @token.get('projects.json')
+    end
+  rescue Exception => e
+    puts "Exception:"
+    puts e.message
+    puts "end Exception"
   end
 
   # @param [Integer] projectid returns project by id
