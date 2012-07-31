@@ -3,21 +3,16 @@ module Settings
   CLIENTSECRET = 'a4fe920e7604a6a4ceacababd98114ffac03b93d'
   REDIRECTURL = 'http://localhost:3000/oauth/request_token'
   SITE = 'https://launchpad.37signals.com/authorization/new'
-  CHANGEUSER = TRUE
+  CHANGEUSER = FALSE
 
   # @param [String] path query path from basecamp api.
-  def form_url(path)
-    "#{Host::URL}/#{Account::IDD}/#{Host::POSTFIX}/#{path}"
+  def form_url(path, accountid = Account::IDD)
+    "https://basecamp.com/#{accountid}/api/v1/#{path}"
   end
 
+  # TODO: This ID must be saved with Token in DB. It must be updated in TokenFactory.
   module Account
-    IDD = '1884058' #project ID
-    #IDD = '1937153' # this ID is created with registering in basecamp.
-  end
-
-  module Host
-    URL = 'https://basecamp.com'
-    POSTFIX = 'api/v1'
+    IDD = '1937153' # this ID is created with registering in basecamp.
   end
 end
 

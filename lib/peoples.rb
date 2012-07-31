@@ -9,7 +9,6 @@ class Peoples < BaseToken
     @token.get("people/#{personid}.json")
   end
 
-
   def get_me
     @token.get("people/me.json")
   end

@@ -1,5 +1,4 @@
 class BaseToken
-
   attr_reader :access_token
 
   def initialize

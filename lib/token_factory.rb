@@ -31,9 +31,6 @@ class TokenFactory
                         :expires_at => tok.expires_at }
     )
 
-    response = token.get('https://launchpad.37signals.com/authorization.json')
-    body = JSON.parse(response.body)
-
     if token.expired?
       puts "Token expired, refreshing..."
       newtoken = token.refresh! :type => "refresh"
@@ -70,10 +67,15 @@ class TokenFactory
       end
     end
 
-    token = Token.create( token: token.token,
-                  refresh_token: token.refresh_token,
-                  expires_in: token.expires_in,
-                  expires_at: token.expires_at )
+    # TODO: Save Account Idd in DB.
+    response = token.get('https://launchpad.37signals.com/authorization.json')
+    body = JSON.parse(response.body)
+
+    Token.create(
+        token: token.token,
+        refresh_token: token.refresh_token,
+        expires_in: token.expires_in,
+        expires_at: token.expires_at)
     token
   end
 

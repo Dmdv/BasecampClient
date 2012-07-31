@@ -4,6 +4,7 @@ class TokenAdapter
 
   # @param [AccessToken] token access token
   def initialize(token)
+    # TODO: Pass here account id.
     @token = token
   end
 
