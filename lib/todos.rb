@@ -14,15 +14,15 @@ class Todos < BaseToken
     data = Date.parse(data.to_a.sort.collect{|c| c[1]}.join("-"))
 
     body =
+    {
+        :content => params[:content],
+        :due_at => data,
+        :assignee =>
         {
-            :content => params[:content],
-            :due_at => data,
-            :assignee =>
-                {
-                    :id => params[:assignee_id],
-                    :type => params[:assignee_type]
-                }
+            :id => params[:assignee_id],
+            :type => params[:assignee_type]
         }
+    }
 
     @token.post("projects/#{projectid}/todolists/#{todolistid}/todos.json", JSON.generate(body))
 
