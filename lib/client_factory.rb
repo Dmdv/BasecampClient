@@ -1,4 +1,4 @@
-class Client
+class ClientFactory
   # To change this template use File | Settings | File Templates.
   def self.create
     @options = {:authorize_url => 'https://launchpad.37signals.com/authorization/new',

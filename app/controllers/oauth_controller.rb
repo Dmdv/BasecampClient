@@ -5,7 +5,7 @@ class OauthController < ApplicationController
 
     # This is used in admin mode, to regenerate new token.
     if Settings::CHANGEUSER
-      client = Client.create
+      client = ClientFactory.create
       redirect_to client.auth_code.authorize_url(:redirect_uri => Settings::REDIRECTURL)
       return
     end
@@ -14,7 +14,7 @@ class OauthController < ApplicationController
     if TokenFactory.any?
       redirect_to :controller => 'projects', :action => 'index'
     else
-      client = Client.create
+      client = ClientFactory.create
       redirect_to client.auth_code.authorize_url(:redirect_uri => Settings::REDIRECTURL)
     end
   end

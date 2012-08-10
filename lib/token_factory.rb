@@ -3,11 +3,9 @@ class TokenFactory
   # @param [Integer] code
   # This code is received during 2 round oauth authorization.
   def self.create_token(code)
-    if code.nil?
-      raise ArgumentError, "code is nill in TokenFactory.create_token"
-    end
+    raise ArgumentError, "code is nill in TokenFactory.create_token" if code.nil?
 
-    client = Client.create
+    client = ClientFactory.create
     token = client.auth_code.get_token(code,
                                        :redirect_uri => Settings::REDIRECTURL,
                                        :headers => {:Authorization => 'Basic some_password',
@@ -19,13 +17,10 @@ class TokenFactory
   # @return [AccessToken]
   def self.get_accesstoken
     tok = Token.first
-
-    if tok.nil?
-      raise ArgumentError, "Token is nill in TokenFactory.get_accesstoken"
-    end
+    raise ArgumentError, "Token is nill in TokenFactory.get_accesstoken" if tok.nil?
 
     token = OAuth2::AccessToken.from_hash(
-        Client.create, {:access_token => tok.token,
+        ClientFactory.create, {:access_token => tok.token,
                         :refresh_token => tok.refresh_token,
                         :expires_in => tok.expires_in,
                         :expires_at => tok.expires_at }
@@ -49,9 +44,7 @@ class TokenFactory
 
     # @param [AccessToken] token Updates AccessToken on autorization.
   def self.update_accesstoken(token, old_token = nil)
-    if token.nil?
-      raise ArgumentError, "Token is nill in TokenFactory.update_accesstoken"
-    end
+    raise ArgumentError, "Token is nill in TokenFactory.update_accesstoken" if token.nil?
 
     unless old_token.nil?
       old_tok = Token.find_by_expires_at old_token.expires_at
