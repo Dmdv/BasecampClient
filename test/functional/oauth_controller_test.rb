@@ -11,8 +11,8 @@ class OauthControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get access_token" do
-    get :access_token
+  test "should get token" do
+    get :token
     assert_response :success
   end
 

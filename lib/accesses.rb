@@ -2,12 +2,12 @@ class Accesses < BaseToken
 
   # @param [Int] projectid Project ID
   def get_projects_people(projectid)
-    @token.get("projects/#{projectid}/accesses.json")
+    get("projects/#{projectid}/accesses.json")
   end
 
   # @param [Int] calendarid Calendar ID
   def get_calendars_people(calendarid)
-    @token.get("calendars/#{calendarid}/accesses.json")
+    get("calendars/#{calendarid}/accesses.json")
   end
 
   def grant_project_access(projectid, ids = [], emails = [])
@@ -16,7 +16,7 @@ class Accesses < BaseToken
     return if ids.empty? && emails.empty?
 
     body = { :ids => ids, :email_addresses => emails }
-    @token.post("projects/#{projectid}/accesses.json", JSON.generate(body))
+    post("projects/#{projectid}/accesses.json", JSON.generate(body))
   end
 
   def grant_calendar_access(calendarid, ids = [], emails = [])
@@ -25,15 +25,14 @@ class Accesses < BaseToken
     return if ids.empty? && emails.empty?
 
     body = { :ids => ids, :email_addresses => emails }
-    @token.post("calendars/#{calendarid}/accesses.json", JSON.generate(body))
+    post("calendars/#{calendarid}/accesses.json", JSON.generate(body))
   end
 
   def revoke_project_access(projectid, personid)
-    @token.delete("projects/#{projectid}/accesses/#{personid}.json")
+    delete("projects/#{projectid}/accesses/#{personid}.json")
   end
 
   def revoke_calendar_access(projectid, personid)
-    @token.delete("calendars/#{projectid}/accesses/#{personid}.json")
+    delete("calendars/#{projectid}/accesses/#{personid}.json")
   end
-
 end

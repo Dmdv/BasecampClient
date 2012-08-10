@@ -4,7 +4,7 @@ class Todos < BaseToken
 
   # returns _todo item.
   def get_single(projectid, todoid)
-    @token.get("projects/#{projectid}/todos/#{todoid}.json")
+    get("projects/#{projectid}/todos/#{todoid}.json")
   end
 
   # will create a new _todo from the parameters passed.
@@ -24,7 +24,7 @@ class Todos < BaseToken
         }
     }
 
-    @token.post("projects/#{projectid}/todolists/#{todolistid}/todos.json", JSON.generate(body))
+    post("projects/#{projectid}/todolists/#{todolistid}/todos.json", JSON.generate(body))
 
   end
 
@@ -44,12 +44,12 @@ class Todos < BaseToken
         }
     )
 
-    @token.put("projects/#{projectid}/todos/#{todoid}.json", opts)
+    put("projects/#{projectid}/todos/#{todoid}.json", opts)
 
   end
 
   # deletes _todo item.
   def delete(projectid, todoid)
-    @token.delete("projects/#{projectid}/todos/#{todoid}.json")
+    super("projects/#{projectid}/todos/#{todoid}.json")
   end
 end

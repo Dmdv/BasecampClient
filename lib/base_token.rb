@@ -1,22 +1,20 @@
 class BaseToken
-  attr_reader :access_token
+  include Settings
 
   def initialize
-    @access_token = TokenFactory.get_accesstoken
-    if self.access_token.nil?
-      raise ArgumentError, "Token is nill in BaseToken.initialize"
-    end
+    @token = TokenFactory.get_accesstoken
+    raise ArgumentError, "Token is nill in BaseToken.initialize" if @token.nil?
   end
 
   def get(path, opts = {})
     url = form_url(path)
-    request = @access_token.get(url, opts)
+    request = @token.get(url, opts)
     JSON.parse(request.body)
   end
 
   def put(path, body)
     url = form_url(path)
-    request = @access_token.put(url) do |req|
+    request = @token.put(url) do |req|
       req.headers['Content-Type'] = 'application/json'
       req.headers['charset'] = 'utf-8'
       req.body = body
@@ -44,7 +42,7 @@ class BaseToken
 
   def post(path, body)
     url = form_url(path)
-    request = @access_token.post(url) do |req|
+    request = @token.post(url) do |req|
       req.headers['Content-Type'] = 'application/json'
       req.headers['charset'] = 'utf-8'
       req.body = body
@@ -55,7 +53,7 @@ class BaseToken
   # @param [String] path url path
   def delete(path)
     url = form_url(path)
-    response = @access_token.delete(url)
+    response = @token.delete(url)
     # if response.env[:status] = 204
   end
 end
