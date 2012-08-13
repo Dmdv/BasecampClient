@@ -4,9 +4,9 @@ class OauthController < ApplicationController
   def login
 
     # This is used in admin mode, to regenerate new token.
-    if Settings::CHANGEUSER
+    if Appconfig.change_user
       client = ClientFactory.create
-      redirect_to client.auth_code.authorize_url(:redirect_uri => Settings::REDIRECTURL)
+      redirect_to client.auth_code.authorize_url(:redirect_uri => Appconfig.redirect_url)
       return
     end
 
@@ -15,7 +15,7 @@ class OauthController < ApplicationController
       redirect_to :controller => 'projects', :action => 'index'
     else
       client = ClientFactory.create
-      redirect_to client.auth_code.authorize_url(:redirect_uri => Settings::REDIRECTURL)
+      redirect_to client.auth_code.authorize_url(:redirect_uri => Appconfig.redirect_url)
     end
   end
 
@@ -26,8 +26,6 @@ class OauthController < ApplicationController
     redirect_to :controller => 'projects', :action => 'index'
   end
 end
-
-require "settings.rb"
 
 # http://developer.37signals.com
 # https://github.com/oauth/oauth-ruby

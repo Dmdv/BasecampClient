@@ -7,7 +7,7 @@ class TokenFactory
 
     client = ClientFactory.create
     token = client.auth_code.get_token(code,
-                                       :redirect_uri => Settings::REDIRECTURL,
+                                       :redirect_uri => Appconfig.redirect_url,
                                        :headers => {:Authorization => 'Basic some_password',
                                                     "User-Agent" => '100 Efforts (dimos-d@yandex.ru)',
                                                     :ca_file => Rails.root.join('lib/cert.pem').to_s})
@@ -53,7 +53,7 @@ class TokenFactory
       end
     end
 
-    if Settings::CHANGEUSER
+    if Appconfig.change_user
       cur_token = Token.first
       unless cur_token.nil?
         cur_token.delete

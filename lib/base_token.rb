@@ -1,6 +1,4 @@
 class BaseToken
-  include Settings
-
   def initialize
     @token = TokenFactory.get_accesstoken
     raise ArgumentError, "Token is nill in BaseToken.initialize" if @token.nil?
@@ -56,4 +54,12 @@ class BaseToken
     response = @token.delete(url)
     # if response.env[:status] = 204
   end
+
+  private
+
+  # @param [String] path query path from basecamp api.
+  def form_url(path, accountid = Appconfig.account_id)
+    "https://basecamp.com/#{accountid}/api/v1/#{path}"
+  end
+
 end

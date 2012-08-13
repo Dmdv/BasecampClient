@@ -6,6 +6,6 @@ class ClientFactory
                 :token_method => :post,
                 :raise_errors => true,
                 :site => 'https://launchpad.37signals.com'}
-    @client ||= BaseClient.new(Settings::CLIENTID, Settings::CLIENTSECRET, @options)
+    @client ||= BaseClient.new(Appconfig.client_id, Appconfig.client_secret, @options)
   end
 end
